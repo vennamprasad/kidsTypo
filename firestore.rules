@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Sessions: write-only, anonymous, no read
+    match /sessions/{sessionId} {
+      allow create: if request.resource.data.keys().hasOnly([
+        'startedAt','mode','keyPresses','bubblesPopped','starsCaught','deviceType'
+      ]);
+      allow read, update, delete: if false;
+    }
+
+    // Parents: only the authenticated parent can read/write their own doc
+    match /parents/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+
+      match /children/{childId} {
+        allow read, write: if request.auth != null && request.auth.uid == uid;
+      }
+    }
+
+    // Analytics: read-only for authenticated parents
+    match /analytics/{date} {
+      allow read: if request.auth != null;
+      allow write: if false; // only Cloud Functions write here
+    }
+
+    // Drawings: parent can read/delete their own
+    match /drawings/{drawingId} {
+      allow create: if request.auth != null;
+      allow read, delete: if request.auth != null
+        && resource.data.parentUid == request.auth.uid;
+      allow update: if false;
+    }
+  }
+}

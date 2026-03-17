@@ -1,0 +1,21 @@
+{
+  "name": "kiddokeys",
+  "private": true,
+  "packageManager": "npm@11.6.1",
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "clean": "turbo clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "functions"
+  ],
+  "devDependencies": {
+    "turbo": "^2.1.2",
+    "prettier": "^3.3.3"
+  }
+}
