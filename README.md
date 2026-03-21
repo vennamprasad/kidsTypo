@@ -203,8 +203,30 @@ Tested modules:
 
 ---
 
-## 📄 License
+## 🤝 Contributing & Open Source
+Kiddlr is an **Open Source** project! We believe in creating the best educational tools for children through community collaboration.
 
+### 🚀 How to Contribute
+We love Pull Requests! Whether it's a new mini-game, a bug fix, or a new language translation:
+1. **Fork** the repository.
+2. Create your **Feature Branch** (`git checkout -b feature/AmazingFeature`).
+3. **Commit** your changes (`git commit -m 'feat: add amazing feature'`).
+4. **Push** to the branch (`git push origin feature/AmazingFeature`).
+5. Open a **Pull Request**.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for more detailed guidelines.
+
+---
+
+## 🤖 Acknowledgements
+This project was developed in collaboration with **Antigravity**, a powerful AI coding agent. 
+- **AI-First Development**: Built using advanced agentic workflows.
+- **Frameworks**: 100% React-based architecture with Next.js 15.
+- **Mission**: Demonstrating how AI and humans can co-create premium, high-impact educational software.
+
+---
+
+## 📄 License
 MIT © [vennamprasad](https://github.com/vennamprasad)
 
 ---
