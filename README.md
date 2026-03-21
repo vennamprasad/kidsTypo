@@ -56,10 +56,6 @@ A full-featured drawing studio powered by **PixiJS WebGL**.
 
 ---
 
-### 🎮 API-Powered Mini Games
-Four brand-new vocabulary games in the navigation bar:
-
-![API Mini Games](docs/screenshots/mini_games.png)
 
 | Game | Description | API |
 |------|-------------|-----|
