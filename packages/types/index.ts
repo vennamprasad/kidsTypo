@@ -1,4 +1,4 @@
-export type Mode = 'keyboard' | 'draw' | 'bubbles' | 'stars';
+export type Mode = 'keyboard' | 'draw' | 'bubbles' | 'stars' | 'word-assoc' | 'animal-sounds' | 'opposite' | 'emoji';
 
 export interface Settings {
   soundEnabled: boolean;

@@ -1,4 +1,4 @@
-# 🎮 KiddoKeys — Project Plan
+# 🎮 KiddoTaps — Project Plan
 > Interactive Play Platform for Preschoolers (Ages 2–5)  
 > Version 1.0 | March 2026
 
@@ -25,7 +25,7 @@
 
 ## 1. Executive Summary
 
-**KiddoKeys** is a browser-based, fullscreen play platform for preschool children (ages 2–5). It provides a safe, parent-monitored environment for keyboard exploration, creative drawing, and simple interactive games — with zero login friction for kids and a rich analytics dashboard for parents.
+**KiddoTaps** is a browser-based, fullscreen play platform for preschool children (ages 2–5). It provides a safe, parent-monitored environment for keyboard exploration, creative drawing, and simple interactive games — with zero login friction for kids and a rich analytics dashboard for parents.
 
 The platform is built for **global scale**, with offline-first support, real-time analytics, and a parent portal backed by Firebase.
 
@@ -185,7 +185,7 @@ The platform is built for **global scale**, with offline-first support, real-tim
 ### 5.2 Firestore Collections
 
 ```
-kiddokeys/
+kiddotaps/
 ├── sessions/              # Anonymous child play sessions
 │   └── {sessionId}/
 │       ├── startedAt
@@ -296,7 +296,7 @@ const ANALYTICS_EVENTS = {
 app/
 ├── (play)/                    # Child play zone — NO auth required
 │   ├── layout.tsx             # Fullscreen layout, no navbar
-│   ├── page.tsx               # KiddoKeys play screen
+│   ├── page.tsx               # KiddoTaps play screen
 │   └── loading.tsx            # Animated loader
 │
 ├── (parent)/                  # Parent portal — Auth required
@@ -535,7 +535,7 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SA }}
           channelId: live
-          projectId: kiddokeys-prod
+          projectId: kiddotaps-prod
 ```
 
 ---
@@ -622,7 +622,7 @@ jobs:
 ## 13. Folder Structure
 
 ```
-kiddokeys/                          # Turborepo root
+kiddotaps/                          # Turborepo root
 ├── apps/
 │   └── web/                        # Next.js 15 app
 │       ├── app/
@@ -739,5 +739,5 @@ firebase emulators:start
 
 ---
 
-*KiddoKeys Project Plan — Confidential*  
+*KiddoTaps Project Plan — Confidential*  
 *Last updated: March 2026*

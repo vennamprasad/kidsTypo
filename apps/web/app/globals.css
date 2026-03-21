@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+/* ── KiddoTaps Brand Tokens ───────────────── */
+:root {
+  /* Palette */
+  --brand-purple:   #7c3aed;
+  --brand-indigo:   #4f46e5;
+  --brand-yellow:   #facc15;
+  --brand-lime:     #84cc16;
+  --brand-pink:     #ec4899;
+  --brand-sky:      #38bdf8;
+
+  /* Backgrounds */
+  --background:     #05050f;
+  --surface:        rgba(255,255,255,0.04);
+
+  /* Text */
+  --foreground:     #f0eeff;
+  --muted:          rgba(255,255,255,0.45);
+
+  /* Glow */
+  --glow-purple: 0 0 40px rgba(124, 58, 237, 0.45);
+  --glow-yellow: 0 0 30px rgba(250, 204, 21, 0.35);
+}
+
+/* ── Base ────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-nunito), 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Brand Gradient Helper ───────────────── */
+.brand-gradient {
+  background: linear-gradient(135deg, var(--brand-purple), var(--brand-indigo));
+}
+
+.text-brand {
+  background: linear-gradient(90deg, #a78bfa, #818cf8, #67e8f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Glassmorphism card ─────────────────── */
+.glass {
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+}
+
+/* ── Scrollbar hide ─────────────────────── */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Keyframe: float ────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+.animate-float { animation: float 3s ease-in-out infinite; }
+
+/* ── Keyframe: shimmer ──────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}

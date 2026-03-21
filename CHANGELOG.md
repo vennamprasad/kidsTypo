@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the KiddoKeys project will be documented in this file.
+All notable changes to the KiddoTaps project will be documented in this file.
 
 ## [Unreleased] - 2026-03-17
 
