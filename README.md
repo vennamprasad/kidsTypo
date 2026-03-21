@@ -119,7 +119,10 @@ Kiddlr uses **Firebase Remote Config** for real-time feature management without 
 ---
 
 ## 🌐 Live Demo
-> Hosted on Firebase Hosting. Check back soon for the production URL!
+The application is now live on Firebase Hosting:
+👉 **[kiddlr.web.app](https://kiddlr.web.app)**
+
+![Live App on Firebase Posting](/Users/prasadvennam/.gemini/antigravity/brain/91803b3f-2d7f-47d4-b671-ae99308900a8/kiddlr_live_confirm_1774099777661.png)
 
 ---
 
