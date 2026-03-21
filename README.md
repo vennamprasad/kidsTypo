@@ -56,20 +56,6 @@ A full-featured drawing studio powered by **PixiJS WebGL**.
 
 ---
 
-### 🫧 Bubble Pop
-Pop letter-bubbles flying across the screen by typing the corresponding key!
-
-![Bubble Pop](docs/screenshots/bubble_pop.png)
-
----
-
-### ⭐ Star Catch
-Catch falling stars by pressing their letters before they fly away!
-
-![Star Catch](docs/screenshots/star_catch.png)
-
----
-
 ### 🎮 API-Powered Mini Games
 Four brand-new vocabulary games in the navigation bar:
 
@@ -99,7 +85,7 @@ A protected dashboard for parents with analytics and controls.
 
 **Features:**
 - 🔐 **Firebase Auth** — Google & Email sign-in
-- 📊 **Live Stats** — Recharts graphs of key presses, bubbles popped, stars caught
+- 📊 **Live Stats** — Recharts graphs of key presses
 - 🖼️ **Drawing Gallery** — View all saved artwork uploaded to Firebase Storage
 - ⚙️ **Settings** — Toggle sound, animations, and child difficulty preferences
 - 👤 **Profile Setup** — Enter Child's name, age, and learning preferences on first login
@@ -148,7 +134,7 @@ kidsTypo/
 │   └── web/                  # Next.js 15 App
 │       ├── app/              # Pages (/, /play, /login, /setup, /dashboard)
 │       ├── components/
-│       │   ├── play/         # KeyboardZone, DrawCanvas, BubbleGame, StarGame, mini-games
+│       │   ├── play/         # KeyboardZone, DrawCanvas, mini-games
 │       │   ├── parent/       # Dashboard, DrawingGallery, SettingsForm
 │       │   ├── providers/    # RemoteConfigProvider, AuthProvider, AnalyticsProvider
 │       │   ├── ui/           # BottomNav, shared UI
