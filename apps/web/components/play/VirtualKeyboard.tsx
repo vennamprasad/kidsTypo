@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
-import { audioManager } from '@/lib/audio';
 
 interface VirtualKeyboardProps {
   onKeyPress: (key: string) => void;
@@ -20,13 +19,32 @@ const NUM_ROW = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 export const VirtualKeyboard = ({ onKeyPress, className }: VirtualKeyboardProps) => {
   const [isNumeric, setIsNumeric] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // Detect touch capability
-    setIsTouch(window.matchMedia('(pointer: coarse)').matches);
+    // Detect touch capability OR small screen
+    const check = () => {
+      const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || ('ontouchstart' in window);
+      const isSmallScreen = window.innerWidth < 1024;
+      setIsTouch(isTouchDevice || isSmallScreen);
+    };
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
   }, []);
 
   if (!isTouch) return null;
+
+  if (!isVisible) {
+    return (
+      <button 
+        onClick={() => setIsVisible(true)}
+        className="fixed bottom-24 right-6 z-[120] bg-pink-500 text-white p-4 rounded-full shadow-2xl animate-bounce border-2 border-white/40"
+      >
+        <Keyboard size={24} />
+      </button>
+    );
+  }
 
   const handleKey = (key: string) => {
     if (key === 'DEL') {
@@ -45,19 +63,24 @@ export const VirtualKeyboard = ({ onKeyPress, className }: VirtualKeyboardProps)
 
   return (
     <div className={cn(
-      "w-full max-w-2xl mx-auto p-2 bg-black/20 backdrop-blur-xl rounded-t-[32px] border-t border-white/20 flex flex-col gap-2 select-none animate-in slide-in-from-bottom duration-500 z-[100]",
+      "w-full max-w-4xl mx-auto p-2 pb-4 bg-black/40 backdrop-blur-2xl rounded-t-[40px] border-t-2 border-white/20 flex flex-col gap-2 select-none animate-in slide-in-from-bottom duration-500 z-[110] relative",
       className
     )}>
       {/* Keyboard Header / Toggles */}
-      <div className="flex justify-between px-4 py-1">
+      <div className="flex justify-between items-center px-6 py-2">
         <button 
           onClick={() => setIsNumeric(!isNumeric)}
+          className="px-4 py-1.5 rounded-full bg-white/10 text-xs font-black uppercase tracking-widest text-white hover:bg-white/20 transition-colors"
+        >
+          {isNumeric ? "ABC" : "123"}
+        </button>
+        <div className="h-1.5 w-16 bg-white/20 rounded-full" />
+        <button 
+          onClick={() => setIsVisible(false)}
           className="text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white transition-colors"
         >
-          {isNumeric ? "Abc" : "123"}
+          Hide ✕
         </button>
-        <div className="h-1 w-12 bg-white/10 rounded-full" />
-        <div className="w-10" /> {/* Spacer */}
       </div>
 
       <div className="flex flex-col gap-1.5 md:gap-2 pb-4">

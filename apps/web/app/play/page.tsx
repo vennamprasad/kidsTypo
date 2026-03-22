@@ -125,7 +125,7 @@ export default function PlayPage() {
         </div>
       )}
       {/* Portrait Warning Overlay */}
-      <div className="fixed inset-0 z-[300] bg-sky-900 flex flex-col items-center justify-center p-8 text-center md:hidden orientation-portrait:flex hidden">
+      <div className="fixed inset-0 z-[300] bg-sky-900 flex flex-col items-center justify-center p-8 text-center sm:hidden portrait:flex hidden">
         <div className="text-6xl mb-6 animate-bounce">🔄</div>
         <h2 className="text-3xl font-black text-white mb-4 uppercase italic">Please Rotate Your Phone!</h2>
         <p className="text-sky-200 font-bold">Kiddlr is best played in Landscape mode. Flip your phone sideways to start the fun! ✨</p>

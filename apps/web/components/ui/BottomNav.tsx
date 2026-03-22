@@ -24,6 +24,15 @@ const navItems: { mode: Mode; icon: React.ElementType; label: string }[] = [
 export const BottomNav = () => {
   const { mode, setMode } = useAppStore();
   const { config } = useConfig();
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+    
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const filteredItems = navItems.filter(item => {
     const key = `show${item.label.replace(/ /g, '')}`;
@@ -46,7 +55,7 @@ export const BottomNav = () => {
           aria-label={item.label}
           title={item.label}
         >
-          <item.icon size={window?.innerWidth < 768 ? 20 : 24} />
+          <item.icon size={isMobile ? 20 : 24} />
           {mode === item.mode && <span className="font-bold text-xs md:text-sm pr-1 md:pr-2">{item.label}</span>}
         </button>
       ))}

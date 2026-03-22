@@ -263,15 +263,15 @@ export const DrawCanvas = () => {
   };
 
   return (
-    <div className="relative w-full h-full overflow-hidden flex flex-col md:flex-row">
+    <div className="relative w-full h-full overflow-hidden flex flex-col lg:flex-row">
       {/* Sidebar Toolbar (Desktop) / Bottom Bar (Mobile) */}
-      <div className="z-10 w-full md:w-24 flex md:flex-col items-center justify-center gap-2 md:gap-4 p-2 md:p-4 bg-white/5 backdrop-blur-xl border-t md:border-t-0 md:border-r border-white/10 order-last md:order-first">
-        <div className="flex md:flex-col gap-2 md:gap-4 overflow-x-auto md:overflow-visible w-full justify-center scrollbar-hide">
+      <div className="z-10 w-full lg:w-24 flex lg:flex-col items-center justify-center gap-2 lg:gap-4 p-2 lg:p-4 bg-white/5 backdrop-blur-xl border-t lg:border-t-0 lg:border-r border-white/10 order-last lg:order-first">
+        <div className="flex lg:flex-col gap-2 lg:gap-4 overflow-x-auto lg:overflow-visible w-full justify-center scrollbar-hide">
           <ToolButton
             id="tool-brush"
             active={activeTool === 'brush'}
             onClick={() => setActiveTool('brush')}
-            icon={<Palette className="w-6 h-6 md:w-7 md:h-7" />}
+            icon={<Palette size={24} />}
             label="Paint"
             color="bg-sky-500"
           />
@@ -279,7 +279,7 @@ export const DrawCanvas = () => {
             id="tool-rainbow"
             active={activeTool === 'rainbow'}
             onClick={() => setActiveTool('rainbow')}
-            icon={<Sparkles className="w-6 h-6 md:w-7 md:h-7" />}
+            icon={<Sparkles size={24} />}
             label="Magic"
             color="bg-gradient-to-br from-red-400 via-green-400 to-blue-400"
           />
@@ -287,7 +287,7 @@ export const DrawCanvas = () => {
             id="tool-stamp"
             active={activeTool === 'stamp'}
             onClick={() => setActiveTool('stamp')}
-            icon={<Sticker className="w-6 h-6 md:w-7 md:h-7" />}
+            icon={<Sticker size={24} />}
             label="Sticker"
             color="bg-amber-400"
           />
@@ -295,13 +295,13 @@ export const DrawCanvas = () => {
             id="tool-eraser"
             active={activeTool === 'eraser'}
             onClick={() => setActiveTool('eraser')}
-            icon={<Eraser className="w-6 h-6 md:w-7 md:h-7" />}
+            icon={<Eraser size={24} />}
             label="Eraser"
             color="bg-slate-500"
           />
         </div>
         
-        <div className="hidden md:flex flex-col gap-4 mt-auto">
+        <div className="hidden lg:flex flex-col gap-4 mt-auto">
           <ToolButton
             id="btn-save"
             active={false}
@@ -323,7 +323,7 @@ export const DrawCanvas = () => {
 
       <div className="flex-1 min-w-0 relative flex flex-col">
         {/* Top bar (Options) */}
-        <div className="min-h-16 md:min-h-20 w-full flex flex-wrap items-center justify-start px-4 md:px-8 py-2 md:py-3 gap-4 md:gap-8 z-20">
+        <div className="min-h-16 lg:min-h-20 w-full flex flex-wrap items-center justify-start px-4 lg:px-8 py-2 lg:py-3 gap-4 lg:gap-8 z-20">
           {activeTool === 'stamp' ? (
             <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide max-w-[80vw]">
               {STAMPS.map(s => (
@@ -337,7 +337,7 @@ export const DrawCanvas = () => {
               ))}
             </div>
           ) : (
-            <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide max-w-[70vw] md:max-w-none">
+            <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide max-w-[70vw] lg:max-w-none">
               {COLORS.map(c => (
                 <button
                   key={c}
@@ -347,27 +347,27 @@ export const DrawCanvas = () => {
                       setActiveTool('brush');
                     }
                   }}
-                  className={`w-8 h-8 md:w-10 md:h-10 rounded-full border-2 md:border-4 flex-shrink-0 transition-all ${color === c ? 'border-white scale-110 shadow-lg' : 'border-transparent'}`}
+                  className={`w-8 h-8 lg:w-10 lg:h-10 rounded-full border-2 lg:border-4 flex-shrink-0 transition-all ${color === c ? 'border-white scale-110 shadow-lg' : 'border-transparent'}`}
                   style={{ backgroundColor: c }}
                 />
               ))}
             </div>
           )}
 
-          <div className="flex flex-shrink-0 items-center gap-2 md:gap-3 bg-white/10 px-3 md:px-5 py-1 md:py-2 rounded-2xl backdrop-blur-md border border-white/20 shadow-lg ml-auto md:ml-0">
-            <span className="hidden sm:inline text-xs sm:text-sm font-bold text-white uppercase tracking-widest text-[10px] md:text-sm">Size</span>
+          <div className="flex flex-shrink-0 items-center gap-2 lg:gap-3 bg-white/10 px-3 lg:px-5 py-1 lg:py-2 rounded-2xl backdrop-blur-md border border-white/20 shadow-lg ml-auto lg:ml-0">
+            <span className="hidden sm:inline text-xs sm:text-sm font-bold text-white uppercase tracking-widest text-[10px] lg:text-sm">Size</span>
             <input
               type="range"
               min="5"
               max="100"
               value={brushSize}
               onChange={(e) => setBrushSize(parseInt(e.target.value))}
-              className="w-20 md:w-32 h-2 bg-white/20 rounded-full appearance-auto cursor-pointer outline-none accent-sky-400"
+              className="w-20 lg:w-32 h-2 bg-white/20 rounded-full appearance-auto cursor-pointer outline-none accent-sky-400"
             />
           </div>
           
           {/* Mobile Actions (Save/Clear) */}
-          <div className="flex md:hidden gap-2">
+          <div className="flex lg:hidden gap-2">
             <button 
               onClick={saveCanvas}
               className="p-2 bg-emerald-500 rounded-xl text-white shadow-lg active:scale-95"
@@ -386,7 +386,7 @@ export const DrawCanvas = () => {
         </div>
 
         {/* Canvas Area */}
-        <div ref={containerRef} className="flex-1 m-2 md:m-4 mt-0 rounded-[24px] md:rounded-[40px] overflow-hidden border-2 md:border-4 border-white/5 shadow-inner" />
+        <div ref={containerRef} className="flex-1 m-2 lg:m-4 mt-0 rounded-[24px] lg:rounded-[40px] overflow-hidden border-2 lg:border-4 border-white/5 shadow-inner" />
 
         {/* Task Objective Badge */}
         {activeTask && activeTask.type === 'drawing' && (
