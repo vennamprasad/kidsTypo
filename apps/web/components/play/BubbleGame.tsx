@@ -192,7 +192,7 @@ export const BubbleGame = () => {
   });
 
   return (
-    <div className="relative w-full h-full overflow-hidden cursor-pointer">
+    <div className="relative w-full h-full overflow-hidden cursor-pointer touch-none">
       <div className="absolute top-6 left-6 z-10 px-4 py-2 bg-white/20 backdrop-blur-md rounded-2xl border border-white/20">
         <span className="text-2xl font-black text-white drop-shadow-md">🫧 {session.bubblesPopped}</span>
       </div>

@@ -32,22 +32,22 @@ export const BottomNav = () => {
   });
 
   return (
-    <div className="fixed bottom-6 z-50 w-[90vw] md:w-auto md:min-w-[400px] left-1/2 -translate-x-1/2 flex items-center gap-2 md:gap-4 px-4 py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full shadow-2xl overflow-x-auto scrollbar-hide">
+    <div className="fixed bottom-4 md:bottom-6 z-[100] w-[95vw] md:w-auto md:min-w-[400px] left-1/2 -translate-x-1/2 flex items-center gap-1 md:gap-4 px-2 md:px-4 py-2 md:py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full shadow-2xl overflow-x-auto scrollbar-hide no-scrollbar">
       {filteredItems.map((item) => (
         <button
           key={item.mode}
           onClick={() => setMode(item.mode)}
           className={cn(
-            "p-3 rounded-full transition-all duration-300 hover:scale-110 active:scale-95 flex-shrink-0 flex items-center gap-2",
+            "p-3 md:p-4 rounded-full transition-all duration-300 hover:scale-110 active:scale-95 flex-shrink-0 flex items-center gap-2",
             mode === item.mode
-              ? "bg-white text-sky-900 shadow-lg"
-              : "text-white hover:bg-white/20"
+              ? "bg-white text-sky-900 shadow-xl scale-105"
+              : "text-white/70 hover:bg-white/10 hover:text-white"
           )}
           aria-label={item.label}
           title={item.label}
         >
-          <item.icon size={24} />
-          {mode === item.mode && <span className="font-bold text-sm pr-2">{item.label}</span>}
+          <item.icon size={window?.innerWidth < 768 ? 20 : 24} />
+          {mode === item.mode && <span className="font-bold text-xs md:text-sm pr-1 md:pr-2">{item.label}</span>}
         </button>
       ))}
     </div>

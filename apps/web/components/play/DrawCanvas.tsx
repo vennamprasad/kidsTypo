@@ -263,42 +263,45 @@ export const DrawCanvas = () => {
   };
 
   return (
-    <div className="relative w-full h-full overflow-hidden flex">
-      {/* Sidebar Toolbar */}
-      <div className="z-10 w-24 flex flex-col items-center gap-4 p-4 bg-white/5 backdrop-blur-xl border-r border-white/10 m-4 rounded-3xl shadow-2xl">
-        <ToolButton
-          id="tool-brush"
-          active={activeTool === 'brush'}
-          onClick={() => setActiveTool('brush')}
-          icon={<Palette size={28} />}
-          label="Paint"
-          color="bg-sky-500"
-        />
-        <ToolButton
-          id="tool-rainbow"
-          active={activeTool === 'rainbow'}
-          onClick={() => setActiveTool('rainbow')}
-          icon={<Sparkles size={28} />}
-          label="Magic"
-          color="bg-gradient-to-br from-red-400 via-green-400 to-blue-400"
-        />
-        <ToolButton
-          id="tool-stamp"
-          active={activeTool === 'stamp'}
-          onClick={() => setActiveTool('stamp')}
-          icon={<Sticker size={28} />}
-          label="Sticker"
-          color="bg-amber-400"
-        />
-        <ToolButton
-          id="tool-eraser"
-          active={activeTool === 'eraser'}
-          onClick={() => setActiveTool('eraser')}
-          icon={<Eraser size={28} />}
-          label="Eraser"
-          color="bg-slate-500"
-        />
-        <div className="mt-auto flex flex-col gap-4">
+    <div className="relative w-full h-full overflow-hidden flex flex-col md:flex-row">
+      {/* Sidebar Toolbar (Desktop) / Bottom Bar (Mobile) */}
+      <div className="z-10 w-full md:w-24 flex md:flex-col items-center justify-center gap-2 md:gap-4 p-2 md:p-4 bg-white/5 backdrop-blur-xl border-t md:border-t-0 md:border-r border-white/10 order-last md:order-first">
+        <div className="flex md:flex-col gap-2 md:gap-4 overflow-x-auto md:overflow-visible w-full justify-center scrollbar-hide">
+          <ToolButton
+            id="tool-brush"
+            active={activeTool === 'brush'}
+            onClick={() => setActiveTool('brush')}
+            icon={<Palette className="w-6 h-6 md:w-7 md:h-7" />}
+            label="Paint"
+            color="bg-sky-500"
+          />
+          <ToolButton
+            id="tool-rainbow"
+            active={activeTool === 'rainbow'}
+            onClick={() => setActiveTool('rainbow')}
+            icon={<Sparkles className="w-6 h-6 md:w-7 md:h-7" />}
+            label="Magic"
+            color="bg-gradient-to-br from-red-400 via-green-400 to-blue-400"
+          />
+          <ToolButton
+            id="tool-stamp"
+            active={activeTool === 'stamp'}
+            onClick={() => setActiveTool('stamp')}
+            icon={<Sticker className="w-6 h-6 md:w-7 md:h-7" />}
+            label="Sticker"
+            color="bg-amber-400"
+          />
+          <ToolButton
+            id="tool-eraser"
+            active={activeTool === 'eraser'}
+            onClick={() => setActiveTool('eraser')}
+            icon={<Eraser className="w-6 h-6 md:w-7 md:h-7" />}
+            label="Eraser"
+            color="bg-slate-500"
+          />
+        </div>
+        
+        <div className="hidden md:flex flex-col gap-4 mt-auto">
           <ToolButton
             id="btn-save"
             active={false}
@@ -320,9 +323,9 @@ export const DrawCanvas = () => {
 
       <div className="flex-1 min-w-0 relative flex flex-col">
         {/* Top bar (Options) */}
-        <div className="min-h-20 w-full flex flex-wrap items-center justify-start px-4 sm:px-8 py-3 gap-6 sm:gap-8 z-20">
+        <div className="min-h-16 md:min-h-20 w-full flex flex-wrap items-center justify-start px-4 md:px-8 py-2 md:py-3 gap-4 md:gap-8 z-20">
           {activeTool === 'stamp' ? (
-            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide max-w-[50vw]">
+            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide max-w-[80vw]">
               {STAMPS.map(s => (
                 <button
                   key={s}
@@ -334,7 +337,7 @@ export const DrawCanvas = () => {
               ))}
             </div>
           ) : (
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide max-w-[70vw] md:max-w-none">
               {COLORS.map(c => (
                 <button
                   key={c}
@@ -344,28 +347,46 @@ export const DrawCanvas = () => {
                       setActiveTool('brush');
                     }
                   }}
-                  className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full border-4 flex-shrink-0 transition-all ${color === c ? 'border-white scale-110 shadow-lg' : 'border-transparent'}`}
+                  className={`w-8 h-8 md:w-10 md:h-10 rounded-full border-2 md:border-4 flex-shrink-0 transition-all ${color === c ? 'border-white scale-110 shadow-lg' : 'border-transparent'}`}
                   style={{ backgroundColor: c }}
                 />
               ))}
             </div>
           )}
 
-          <div className="flex flex-shrink-0 items-center gap-3 bg-white/10 px-5 py-2 rounded-2xl backdrop-blur-md border border-white/20 shadow-lg">
-            <span className="text-xs sm:text-sm font-bold text-white uppercase tracking-widest">Size</span>
+          <div className="flex flex-shrink-0 items-center gap-2 md:gap-3 bg-white/10 px-3 md:px-5 py-1 md:py-2 rounded-2xl backdrop-blur-md border border-white/20 shadow-lg ml-auto md:ml-0">
+            <span className="hidden sm:inline text-xs sm:text-sm font-bold text-white uppercase tracking-widest text-[10px] md:text-sm">Size</span>
             <input
               type="range"
               min="5"
               max="100"
               value={brushSize}
               onChange={(e) => setBrushSize(parseInt(e.target.value))}
-              className="w-32 h-2 bg-white/20 rounded-full appearance-auto cursor-pointer outline-none accent-sky-400"
+              className="w-20 md:w-32 h-2 bg-white/20 rounded-full appearance-auto cursor-pointer outline-none accent-sky-400"
             />
+          </div>
+          
+          {/* Mobile Actions (Save/Clear) */}
+          <div className="flex md:hidden gap-2">
+            <button 
+              onClick={saveCanvas}
+              className="p-2 bg-emerald-500 rounded-xl text-white shadow-lg active:scale-95"
+              aria-label="Save"
+            >
+              <Camera size={20} />
+            </button>
+            <button 
+              onClick={clearCanvas}
+              className="p-2 bg-rose-500 rounded-xl text-white shadow-lg active:scale-95"
+              aria-label="Clear"
+            >
+              <Trash2 size={20} />
+            </button>
           </div>
         </div>
 
         {/* Canvas Area */}
-        <div ref={containerRef} className="flex-1 m-4 mt-0 rounded-[40px] overflow-hidden border-4 border-white/5 shadow-inner" />
+        <div ref={containerRef} className="flex-1 m-2 md:m-4 mt-0 rounded-[24px] md:rounded-[40px] overflow-hidden border-2 md:border-4 border-white/5 shadow-inner" />
 
         {/* Task Objective Badge */}
         {activeTask && activeTask.type === 'drawing' && (

@@ -15,6 +15,7 @@ import { BottomNav } from '@/components/ui/BottomNav';
 import { BackgroundEffects } from '@/components/effects/BackgroundEffects';
 
 
+import { VirtualKeyboard } from '@/components/play/VirtualKeyboard';
 
 export default function PlayPage() {
   const mode = useAppStore((state) => state.mode);
@@ -41,13 +42,25 @@ export default function PlayPage() {
     }
   };
 
+  // Simulated keypress for Virtual Keyboard
+  const handleVirtualKey = (key: string) => {
+    const event = new KeyboardEvent('keydown', {
+      key: key,
+      code: `Key${key.toUpperCase()}`,
+      bubbles: true
+    });
+    window.dispatchEvent(event);
+  };
+
+  const showKeyboard = mode === 'keyboard' || mode === 'word-assoc' || mode === 'emoji';
+
   return (
-    <main className="relative w-screen h-screen overflow-hidden bg-black">
+    <main className="relative w-screen h-screen overflow-hidden bg-black flex flex-col">
       <BackgroundEffects />
 
       
       {/* Mode Content */}
-      <div className="w-full h-full">
+      <div className="flex-1 w-full min-h-0 relative">
         {mode === 'keyboard' && <KeyboardZone />}
         {mode === 'draw' && <DrawCanvas />}
         {mode === 'bubbles' && <BubbleGame />}
@@ -58,17 +71,24 @@ export default function PlayPage() {
         {mode === 'emoji' && <EmojiGame />}
       </div>
 
+      {/* Virtual Keyboard (Touch only) */}
+      {showKeyboard && (
+        <div className="w-full">
+          <VirtualKeyboard onKeyPress={handleVirtualKey} />
+        </div>
+      )}
+
       {/* Navigation */}
       <BottomNav />
       
       {/* Visual Overlays (e.g. settings button top right) */}
       <button 
-        className="absolute top-6 right-6 p-4 bg-white/10 hover:bg-white/20 rounded-3xl text-white/40 transition-all z-50 backdrop-blur-md border border-white/10 hover:scale-110 active:scale-95 flex items-center gap-2"
+        className="fixed top-4 right-4 md:top-6 md:right-6 p-2 md:p-4 bg-white/10 hover:bg-white/20 rounded-2xl md:rounded-3xl text-white/40 transition-all z-[150] backdrop-blur-md border border-white/10 hover:scale-110 active:scale-95 flex items-center gap-2"
         onClick={startGate}
         title="Parent Portal"
       >
-        <span className="text-white text-xl">🔒</span>
-        <span className="text-[10px] font-black uppercase tracking-widest text-white/60">Grown-ups</span>
+        <span className="text-white text-lg md:text-xl">🔒</span>
+        <span className="hidden md:block text-[10px] font-black uppercase tracking-widest text-white/60">Grown-ups</span>
       </button>
 
       {/* Parent Gate Modal */}
@@ -104,6 +124,12 @@ export default function PlayPage() {
           </div>
         </div>
       )}
+      {/* Portrait Warning Overlay */}
+      <div className="fixed inset-0 z-[300] bg-sky-900 flex flex-col items-center justify-center p-8 text-center md:hidden orientation-portrait:flex hidden">
+        <div className="text-6xl mb-6 animate-bounce">🔄</div>
+        <h2 className="text-3xl font-black text-white mb-4 uppercase italic">Please Rotate Your Phone!</h2>
+        <p className="text-sky-200 font-bold">Kiddlr is best played in Landscape mode. Flip your phone sideways to start the fun! ✨</p>
+      </div>
     </main>
   );
 }
