@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { Keyboard } from 'lucide-react';
 
 interface VirtualKeyboardProps {
   onKeyPress: (key: string) => void;
